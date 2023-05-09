@@ -10,15 +10,15 @@ DEMOSRCS=demo.cpp
 OBJDIR=obj/
 DEPDIR=dep/
 
-all: $(OBJDIR) $(DEPDIR) hash.exe test.exe testGen.exe
+all: $(OBJDIR) $(DEPDIR) hash.exe test.exe testGen.exe hash2.exe
 
 $(OBJDIR)%.o: %.cpp
-	$(CC) -M $(CC_ARGS) $< -o $(DEPDIR)$(<:.cpp=.d)
+	$(CC) -M $(CCARGS) $< -o $(DEPDIR)$(<:.cpp=.d)
 	echo "$(OBJDIR)" > line.tmp
 	mv $(DEPDIR)$(<:.cpp=.d) input.tmp
 	head -c -1 -q line.tmp input.tmp > $(DEPDIR)$(<:.cpp=.d)
 	rm input.tmp line.tmp
-	$(CC) -c $(CC_ARGS) $< -o $@
+	$(CC) -c $(CCARGS) $< -o $@
 
 include $(wildcard $(DEPDIR)/*.d)
 
@@ -33,6 +33,9 @@ testGen.exe: $(addprefix $(OBJDIR), $(TESTGENSRCS:.cpp=.o))
 
 graph:
 	gnuplot $(GNUPLOTSRC)
+
+hash2.exe: hash2.cpp
+	$(CC) $(OBJARGS) $(CCARGS) $^ -o $@
 
 demo: $(DEMOSRCS)
 	make all

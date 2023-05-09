@@ -120,7 +120,7 @@ int _load_db(const char *filename, ht *table)
 ht *ht_create(size_t start_size, size_t (*hash_func)(size_t size, const char *key))
 {
     ht *ret = (ht *)malloc(sizeof(ht));
-    ret = (ht *)(calloc(start_size, sizeof(ht_list *)), start_size, 0, hash_func);
+    ret = (ht *) ( calloc (start_size, sizeof(ht_list *)) , start_size, 0, hash_func);
     return ret;
 }
 
@@ -234,16 +234,6 @@ void ht_print(const ht *table)
         list_print(table->buckets[i]);
     }
     return;
-}
-
-//============================================================================================================
-
-int read_chars(char ch)
-{
-    if (ch != 'H' || ch != 'Q' || ch != 'S' || ch != 'A' || ch != 'D' || ch != 'P' || ch != 'L' || ch != 'M')
-    {
-        printf("Error code: 3. Incorrect character input.\n");
-    }
 }
 
 //============================================================================================================

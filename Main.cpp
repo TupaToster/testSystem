@@ -33,9 +33,7 @@ int main()
 
       ht *table = ht_create(1000, hashfunc);
 
-      _load_db("database.txt", table);
-
-      FILE *jr = fopen("journal.txt", "r+");
+      // _load_db("database.txt", table);
 
       printf("Hello! Please, enter a command or type 'Help':\n");
 
@@ -45,9 +43,15 @@ int main()
 
       while (flag)
       {
-            printf ("lol");
             char n = scanf("%c", &cmd);
-            read_chars(n);
+
+            if (cmd != 'H' && cmd != 'Q' && cmd != 'S' && cmd != 'A' && cmd != 'D' && cmd != 'P' && cmd != 'L' && cmd != 'M')
+            {
+                  printf("Error code: 3. Incorrect character input.\n");
+                  while ((cmd = getchar()) != '\n' && cmd != EOF);
+                  continue;
+            }
+
             char key[100];
             switch (cmd)
             {
@@ -61,7 +65,6 @@ int main()
                   break;
             case 'S':
                   scanf("%s", key);
-                  // res = (ht_list *)malloc(sizeof(ht_list));
                   res = ht_search(table, key);
                   if (res == NULL)
                   {
@@ -114,6 +117,6 @@ int main()
                   printf("Unknown command\n");
                   break;
             }
+            while ((cmd = getchar()) != '\n' && cmd != EOF);
       }
-      fclose(jr);
 }
