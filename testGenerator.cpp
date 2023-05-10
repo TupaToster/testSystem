@@ -7,13 +7,15 @@
 
 int main (int argc, char* argv[]) {
 
-    assert (argc == 2);
+    assert (argc == 3);
 
     char prefix = '\0';
 
     if (strcmp (argv[1], "-I") == 0) prefix = 'A';
     else if (strcmp (argv[1], "-S") == 0) prefix = 'S';
     else return -1;
+
+    unsigned int testSize = atoi (argv[2]);
 
     FILE* outFile = fopen (testFileName, "wb");
     assert (outFile != NULL);
@@ -25,7 +27,7 @@ int main (int argc, char* argv[]) {
     outStr[0] = prefix;
     outStr[1] = ' ';
 
-    for (int i = 0; i < maxTestSize; i++) {
+    for (int i = 0; i < testSize; i++) {
 
         for (int j = 2; j < strLen + 2; j++) {
 
@@ -37,6 +39,8 @@ int main (int argc, char* argv[]) {
         if (prefix == 'A') fprintf (outFile, "%u", hashFunc (outStr));
         fprintf (outFile, "\n");
     }
+
+    fprintf (outFile, "Q\n");
 
     fclose (outFile);
 }

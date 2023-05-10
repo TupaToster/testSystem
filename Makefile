@@ -1,8 +1,7 @@
 CC=g++
 OBJARGS=
 CCARGS=
-HASHSRCS=Main.cpp HashTable.cpp
-# HASHSRCS=main.cpp
+HASHSRCS=main.cpp hashtable.cpp
 TESTSRCS=tester.cpp
 TESTGENSRCS=testGenerator.cpp
 GNUPLOTSRC=gnuPlotScript.gp
@@ -49,7 +48,7 @@ $(DEPDIR):
 	mkdir $@
 
 clean:
-	rm -rf *.o *.d *.dot *.png *.txt *.exe
+	rm -rf *.o *.d *.exe
 	rm -rf $(DEPDIR) $(OBJDIR)
 	clear
 

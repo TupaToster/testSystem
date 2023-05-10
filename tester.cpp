@@ -14,17 +14,19 @@ int main () {
     FILE* dataFileInsert = fopen (graphDataNameInsert, "wb");
     assert (dataFileInsert != NULL);
 
-    for (int testSize = 1; testSize < maxTestSize; testSize++) {
+    for (int testSize = 100; testSize < maxTestSize; testSize+=100) {
+
+        printf ("testSize : %u\n", testSize, testSize);
 
         if (GenerateTests) {
 
-            sprintf (command, "./%s -I", testGen);
+            sprintf (command, "./%s -I %d", testGen, testSize);
             system (command);
         }
 
         std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now ();
 
-        sprintf (command, "./%s < %s", subjectName, testFileName);
+        sprintf (command, "./%s < %s > %s", subjectName, testFileName, outputFileName);
         system (command);
 
         std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now ();
@@ -37,13 +39,13 @@ int main () {
 
         if (GenerateTests) {
 
-            sprintf (command, "./%s -S", testGen);
+            sprintf (command, "./%s -S %d", testGen, testSize);
             system (command);
         }
 
         begin = std::chrono::steady_clock::now ();
 
-        sprintf (command, "./%s < %s", subjectName, testFileName);
+        sprintf (command, "./%s < %s > %s", subjectName, testFileName, outputFileName);
         system (command);
 
         end = std::chrono::steady_clock::now ();
