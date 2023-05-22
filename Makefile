@@ -1,7 +1,7 @@
 CC=g++
 OBJARGS=
 CCARGS=
-HASHSRCS=main.cpp hashtable.cpp
+HASHSRCS=main.c hashtable.c
 TESTSRCS=tester.cpp
 TESTGENSRCS=testGenerator.cpp
 GNUPLOTSRC=gnuPlotScript.gp
@@ -10,6 +10,14 @@ OBJDIR=obj/
 DEPDIR=dep/
 
 all: $(OBJDIR) $(DEPDIR) hash.exe test.exe testGen.exe hash2.exe
+
+$(OBJDIR)%.o: %.c
+	$(CC) -M $(CCARGS) $< -o $(DEPDIR)$(<:.cpp=.d)
+	echo "$(OBJDIR)" > line.tmp
+	mv $(DEPDIR)$(<:.cpp=.d) input.tmp
+	head -c -1 -q line.tmp input.tmp > $(DEPDIR)$(<:.cpp=.d)
+	rm input.tmp line.tmp
+	$(CC) -c $(CCARGS) $< -o $@
 
 $(OBJDIR)%.o: %.cpp
 	$(CC) -M $(CCARGS) $< -o $(DEPDIR)$(<:.cpp=.d)
@@ -21,7 +29,7 @@ $(OBJDIR)%.o: %.cpp
 
 include $(wildcard $(DEPDIR)/*.d)
 
-hash.exe: $(addprefix $(OBJDIR), $(HASHSRCS:.cpp=.o))
+hash.exe: $(addprefix $(OBJDIR), $(HASHSRCS:.c=.o))
 	$(CC) $(OBJARGS) $^ -o $@
 
 test.exe: $(addprefix $(OBJDIR), $(TESTSRCS:.cpp=.o))

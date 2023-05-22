@@ -4,7 +4,8 @@ const char testGen[] = "testGen.exe";
 const char graphDataNameSearch[] = "data_search.txt";
 const char graphDataNameInsert[] = "data_insert.txt";
 const char outputFileName[] = "out.txt";
-const int maxTestSize = 500000;
+const unsigned int maxTestSize = 100000000;
+const unsigned int sizeDelta = 100000;
 const int strLen = 10;
 const bool GenerateTests = true;
 

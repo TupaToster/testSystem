@@ -14,7 +14,7 @@ int main () {
     FILE* dataFileInsert = fopen (graphDataNameInsert, "wb");
     assert (dataFileInsert != NULL);
 
-    for (int testSize = 100; testSize < maxTestSize; testSize+=100) {
+    for (int testSize = 100000; testSize < maxTestSize; testSize+=100000) {
 
         printf ("testSize : %u\n", testSize, testSize);
 
