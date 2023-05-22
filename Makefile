@@ -1,7 +1,7 @@
 CC=g++
 OBJARGS=
 CCARGS=
-HASHSRCS=main.c hashtable.c
+HASHSRCS=Main.c Hashtable.c
 TESTSRCS=tester.cpp
 TESTGENSRCS=testGenerator.cpp
 GNUPLOTSRC=gnuPlotScript.gp
