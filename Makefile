@@ -12,10 +12,10 @@ DEPDIR=dep/
 all: $(OBJDIR) $(DEPDIR) hash.exe test.exe testGen.exe hash2.exe
 
 $(OBJDIR)%.o: %.c
-	$(CC) -M $(CCARGS) $< -o $(DEPDIR)$(<:.cpp=.d)
+	$(CC) -M $(CCARGS) $< -o $(DEPDIR)$(<:.c=.d)
 	echo "$(OBJDIR)" > line.tmp
-	mv $(DEPDIR)$(<:.cpp=.d) input.tmp
-	head -c -1 -q line.tmp input.tmp > $(DEPDIR)$(<:.cpp=.d)
+	mv $(DEPDIR)$(<:.c=.d) input.tmp
+	head -c -1 -q line.tmp input.tmp > $(DEPDIR)$(<:.c=.d)
 	rm input.tmp line.tmp
 	$(CC) -c $(CCARGS) $< -o $@
 
